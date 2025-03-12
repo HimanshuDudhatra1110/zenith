@@ -1,0 +1,104 @@
+.main-top-container {
+  overflow: visible !important;
+  margin-right: 0 !important;
+  position: static !important;
+}
+/* Custom Color */
+.hz-bg-cyan {
+  background-color: #00adb5;
+}
+.hz-bg-cyan-50 {
+  background-color: #e0f9fa;
+}
+.hz-bg-cyan-100 {
+  background-color: #c1f3f5;
+}
+.hz-bg-cyan-200 {
+  background-color: #83e6ea;
+}
+.hz-bg-cyan-300 {
+  background-color: #45d8df;
+}
+.hz-bg-cyan-400 {
+  background-color: #1ecad4;
+}
+.hz-bg-cyan-500 {
+  background-color: #00adb5;
+}
+.hz-bg-cyan-600 {
+  background-color: #008a91;
+}
+.hz-bg-cyan-700 {
+  background-color: #00666d;
+}
+.hz-bg-cyan-800 {
+  background-color: #004349;
+}
+.hz-bg-cyan-900 {
+  background-color: #002024;
+}
+
+.hz-text-cyan {
+  color: #00adb5;
+}
+.hz-text-cyan-50 {
+  color: #e0f9fa;
+}
+.hz-text-cyan-100 {
+  color: #c1f3f5;
+}
+.hz-text-cyan-200 {
+  color: #83e6ea;
+}
+.hz-text-cyan-300 {
+  color: #45d8df;
+}
+.hz-text-cyan-400 {
+  color: #1ecad4;
+}
+.hz-text-cyan-500 {
+  color: #00adb5;
+}
+.hz-text-cyan-600 {
+  color: #008a91;
+}
+.hz-text-cyan-700 {
+  color: #00666d;
+}
+.hz-text-cyan-800 {
+  color: #004349;
+}
+.hz-text-cyan-900 {
+  color: #002024;
+}
+
+/* Login Page */
+
+.hz-form-label {
+  color: var(--tw-gray-700);
+  font-weight: 500;
+  font-size: 0.85rem;
+  line-height: 1.125rem;
+}
+
+.hz-login-btn:hover {
+  background-color: #008a91;
+  box-shadow: 0 4px 8px rgba(0, 32, 36, 0.15);
+}
+
+.hz-animate-text {
+  width: 20ch;
+  display: inline-block; /* Required for width animation */
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing text */
+  animation: typing 2s steps(20) infinite alternate-reverse;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

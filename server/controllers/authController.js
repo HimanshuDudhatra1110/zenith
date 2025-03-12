@@ -1,6 +1,16 @@
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 
+export const validateUserController = async (req, res) => {
+  const user = req.user;
+
+  // covert the user into js object and remove _id
+  const userObject = user.toObject();
+  delete userObject._id;
+
+  res.status(200).json({ user: userObject, message: "User is authenticated" });
+};
+
 export const registerController = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -69,7 +79,7 @@ export const loginController = async (req, res) => {
     // check if password is correct
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message: "invalid password" });
+      return res.status(401).json({ message: "invalid credentials" });
     }
 
     // Generate JWT token
@@ -99,7 +109,7 @@ export const logoutController = async (req, res) => {
     res.clearCookie("token");
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    console.error("Error logging in user", error);
+    console.error("Error in user logout", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

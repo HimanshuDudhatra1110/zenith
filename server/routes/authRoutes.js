@@ -3,6 +3,7 @@ import {
   loginController,
   logoutController,
   registerController,
+  validateUserController,
 } from "../controllers/authController.js";
 import {
   handleValidationError,
@@ -24,10 +25,7 @@ router.post(
 router.post("/login", validateLogin, handleValidationError, loginController);
 
 // validate user
-router.get("/validate", authenticateUser, (req, res) => {
-  const user = req.user;
-  res.json({ user, message: "User is authenticated" });
-});
+router.get("/validate", authenticateUser, validateUserController);
 
 router.post("/logout", authenticateUser, logoutController);
 
