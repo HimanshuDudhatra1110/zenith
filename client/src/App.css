@@ -1,3 +1,9 @@
+:root {
+  --card-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+  --card-background-color: white;
+  --card-border: 1px solid #f1f1f4;
+}
+
 .main-top-container {
   overflow: visible !important;
   margin-right: 0 !important;
@@ -72,10 +78,37 @@
   color: #002024;
 }
 
+.hz-modal-bg {
+  background-color: #000000cc;
+}
+.hz-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--card-box-shadow);
+  background-color: var(--card-background-color);
+  border-radius: 0.75rem;
+  border: var(--card-border);
+}
+
+.hz-card-header {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f1f4;
+}
+
+/* Dashboard */
+.hz-score-card-bg {
+  background-image: url("images/bg-3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right top -1.7rem;
+}
 /* Login Page */
 
 .hz-form-label {
-  color: var(--tw-gray-700);
+  color: #4b5675;
   font-weight: 500;
   font-size: 0.85rem;
   line-height: 1.125rem;

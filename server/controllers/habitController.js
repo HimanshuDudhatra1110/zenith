@@ -82,8 +82,17 @@ export const getAllHabitsController = async (req, res) => {
     if (habits.length === 0) {
       return res.status(404).json({ message: "No habits found" });
     }
+    // Divide habits into positive and negative arrays
+    const positiveHabits = habits.filter((habit) => habit.isPositive);
+    const negativeHabits = habits.filter((habit) => !habit.isPositive);
 
-    res.status(200).json({ habits, message: "Habits fetched successfully" });
+    res
+      .status(200)
+      .json({
+        positiveHabits,
+        negativeHabits,
+        message: "Habits fetched successfully",
+      });
   } catch (error) {
     console.error("Error getting all habits: ", error);
     res.status(500).json({ message: "Internal server error" });
@@ -98,8 +107,6 @@ export const deleteHabitController = async (req, res) => {
 
     // find the habit to delete
     const habit = await Habit.findById(id).select("userId");
-
-    res.json({ habit });
 
     // check if habit exists
     if (!habit) {

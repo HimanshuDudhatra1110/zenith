@@ -1,22 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../constants/api";
+import { ADMINLOGIN } from "../constants/routes";
 
 const AuthContext = createContext(undefined);
-
-// create an axios instance with deafault config which can be used in entire application
-const api = axios.create({
-  withCredentials: true, // Important for sending and receiving cookies
-});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  // get api base url from environment variables
-  const apiBaseUrl = import.meta.env.VITE_API_URL;
 
   // setup axios interceptor to handle API errors globally
   useEffect(() => {
@@ -26,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         if (error.response?.status === 401) {
           // Unauthorized - clear user state and redirect user back to login page
           setUser(null);
-          navigate("/login");
+          navigate(ADMINLOGIN);
         }
         // pass the error down to the promise chain
         // This allows component-level catch blocks to still handle the error if needed
@@ -51,8 +44,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
       try {
-        const response = await api.get(`${apiBaseUrl}/v1/auth/validate`);
-        console.log("validate session response: ", response);
+        const response = await api.get("/v1/auth/validate");
 
         if (response.data?.user) {
           setUser(response.data.user);
@@ -69,15 +61,15 @@ export const AuthProvider = ({ children }) => {
       }
     };
     validateSession();
-  }, [apiBaseUrl]);
+  }, []);
 
   // login function
-  const login = async (email, password) => {
+  const adminLogin = async (email, password) => {
     try {
       setError(null);
       setLoading(true);
 
-      const response = await api.post(`${apiBaseUrl}/v1/auth/login`, {
+      const response = await api.post("/v1/auth/admin-login", {
         email,
         password,
       });
@@ -99,14 +91,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   // register function
-  const register = async (name, email, password) => {
+  const register = async (first_name, last_name, email, password, role) => {
     try {
       setError(null);
       setLoading(true);
-      const response = await api.post(`${apiBaseUrl}/v1/auth/register`, {
-        name,
+      const response = await api.post("/v1/auth/register", {
+        first_name,
+        last_name,
         email,
         password,
+        role,
       });
 
       // set data in user state
@@ -127,7 +121,7 @@ export const AuthProvider = ({ children }) => {
   // logout function
   const logout = async () => {
     try {
-      await api.post(`${apiBaseUrl}/v1/auth/logout`);
+      await api.post("/v1/auth/logout");
     } catch (error) {
       console.error("Logout failed", error.message);
     } finally {
@@ -139,7 +133,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, error, login, register, logout }}
+      value={{ user, loading, error, adminLogin, register, logout }}
     >
       {children}
     </AuthContext.Provider>

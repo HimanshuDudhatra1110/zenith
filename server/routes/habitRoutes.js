@@ -17,7 +17,7 @@ const router = express.Router();
 
 // post : create habit
 router.post(
-  "/create",
+  "/",
   authenticateUser,
   validateCreateHabit,
   handleValidationError,
@@ -34,7 +34,7 @@ router.post(
 );
 
 // get : get all habits
-router.get("/get-all", authenticateUser, getAllHabitsController);
+router.get("/", authenticateUser, getAllHabitsController);
 
 // delete : delete habit
 router.delete(

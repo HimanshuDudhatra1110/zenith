@@ -69,9 +69,7 @@ export const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     // check if user exists
-    const user = await User.findOne({ email })
-      .select("+password")
-      .select("-_id");
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(401).json({ message: "email not registered" });
     }
@@ -81,6 +79,10 @@ export const loginController = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "invalid credentials" });
     }
+
+    // update last login
+    user.lastLogin = new Date();
+    await user.save();
 
     // Generate JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -95,8 +97,12 @@ export const loginController = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
     });
 
+    // covert the user into js object and remove _id
+    const userObject = user.toObject();
+    delete userObject._id;
+
     // send the response
-    res.status(200).json({ user, message: "login successful" });
+    res.status(200).json({ user: userObject, message: "login successful" });
   } catch (error) {
     console.error("Error logging in user", error);
     res.status(500).json({ message: "Internal server error" });

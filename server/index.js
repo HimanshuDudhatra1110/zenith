@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import diaryRoutes from "./routes/diaryRoutes.js";
 import habitRoutes from "./routes/habitRoutes.js";
+import noteRoutes from "./routes/noteRoutes.js";
 
 // Load environment variables from.env file
 dotenv.config();
@@ -55,6 +56,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/diary", diaryRoutes);
 app.use("/api/v1/habit", habitRoutes);
+app.use("/api/v1/note", noteRoutes);
 
 // Handle 404 routes
 app.use("*", (req, res) => {

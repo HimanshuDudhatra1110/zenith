@@ -8,6 +8,10 @@ import SidebarLayout from "./components/SidebarLayout.jsx";
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
+const Notes = lazy(() => import("./pages/note/Notes.jsx"));
+const ViewNote = lazy(() => import("./pages/note/ViewNote.jsx"));
+const Diary = lazy(() => import("./pages/Diary.jsx"));
+const HabitTracking = lazy(() => import("./pages/HabitTracking.jsx"));
 
 export default function App() {
   return (
@@ -20,6 +24,10 @@ export default function App() {
               <Route path={ROUTES.REGISTER} element={<Register />} />
               <Route element={<SidebarLayout />}>
                 <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+                <Route path={ROUTES.NOTES} element={<Notes />} />
+                <Route path={`${ROUTES.NOTE}/:id`} element={<ViewNote />} />
+                <Route path={ROUTES.DIARY} element={<Diary />} />
+                <Route path={ROUTES.HABIT} element={<HabitTracking />} />
               </Route>
             </Routes>
           </Suspense>

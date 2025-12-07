@@ -109,3 +109,31 @@ export const validateDeleteHabit = [
     .isMongoId()
     .withMessage("Invalid habit ID"), // Ensures ID is a valid MongoDB ObjectId
 ];
+
+// validatopn for create note
+export const validateCreateNote = [
+  body("title").notEmpty().withMessage("Title is required"),
+  body("content").notEmpty().withMessage("Content is required"),
+];
+
+// validation for update note
+export const validateUpdateNote = [
+  body("noteId")
+    .notEmpty()
+    .withMessage("Id is required")
+    .isMongoId()
+    .withMessage("Invalid Note ID"),
+  ...validateCreateNote,
+];
+
+// validation for delete note
+
+export const validateDeleteNote = [
+  param("id")
+    .exists()
+    .withMessage("Note ID is required")
+    .notEmpty()
+    .withMessage("Note ID cannot be empty")
+    .isMongoId()
+    .withMessage("Invalid Note ID"),
+];

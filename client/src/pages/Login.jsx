@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { DASHBOARD, REGISTER } from "../constants/routes";

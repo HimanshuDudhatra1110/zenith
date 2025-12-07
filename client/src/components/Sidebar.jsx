@@ -10,7 +10,7 @@ import {
   NotepadText,
 } from "lucide-react";
 
-const Sidebar = ({ isExpanded, toggleSidebar }) => {
+const Sidebar = ({ isExpanded, toggleSidebar, isMobile }) => {
   const location = useLocation();
 
   const isActive = (path, exact = false) => {

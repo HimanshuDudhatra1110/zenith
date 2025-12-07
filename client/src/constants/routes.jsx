@@ -5,3 +5,5 @@ export const LOGOUT = "/logout";
 export const HABIT = "/habit";
 export const DIARY = "/diary";
 export const NOTES = "/notes";
+export const NOTE = "/note";
+export const ADMINLOGIN = "/login/admin";
